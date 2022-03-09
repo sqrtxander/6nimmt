@@ -1,5 +1,4 @@
 import random
-from xml.dom.minidom import Element
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtGui import QPixmap
 import sys
@@ -10,8 +9,6 @@ from mainWin import Ui_MainWindow
 
 from functools import partial
 
-def hello():
-    print('hello')
 
 class Player:
     def __init__(self):
@@ -19,9 +16,6 @@ class Player:
         self.hand = []
         self.pickups = []
 
-
-def hello():
-    print('hello')
 
 class Game:
     def __init__(self):
@@ -69,10 +63,20 @@ class Game:
                          [self.ui.table30, self.ui.table31, self.ui.table32, self.ui.table33, self.ui.table34, self.ui.table35]]
 
         self.ui.scores = [self.ui.p1_score, self.ui.p2_score, self.ui.p3_score, self.ui.p4_score]
-
         self.ui.played = [self.ui.p1_played, self.ui.p2_played, self.ui.p3_played, self.ui.p4_played]
-        self.reset()
+        self.ui.pickups = [self.ui.p1_pickup, self.ui.p2_pickup, self.ui.p3_pickup, self.ui.pr_pickup]
+        
+        # creating the players array
+        self.players = [Player(), Player(), Player(), Player()]
 
+        for i, widget in enumerate(self.ui.hand):
+            widget.clicked.connect(partial(self.place_cards, i))
+
+        for played in self.ui.played:
+            played.setPixmap(QPixmap('cards/blank.png'))
+
+
+        self.reset()
 
     def reset(self):
         # creating the deck
@@ -85,8 +89,6 @@ class Game:
         for _ in range(4):
             self.table.append([deck.pop()])
 
-        # creating the players array
-        self.players = [Player(), Player(), Player(), Player()]
 
         # dealing the cards
         for _ in range(10):
@@ -102,13 +104,10 @@ class Game:
             for player in self.players:
                 player.score = 0
 
+        # reenable hand
+        self.reenable_hand()
+
         self.update_display()
-
-
-        for i, widget in enumerate(self.ui.hand):
-            widget.clicked.connect(partial(self.place_cards, i))
-
-
 
     def is_game_over(self):
         # true if any player has a score >= 66
@@ -129,23 +128,34 @@ class Game:
     def update_display(self):
         # clear everything
         for widget in self.ui.hand:
-            widget.setText('')
+            widget.setStyleSheet('background-image: url(cards/blank.png)')
         for row in self.ui.table:
-            for widget in row:
-                widget.setText('')
+            for i, widget in enumerate(row):
+                if i == 5:
+                    widget.setStyleSheet('background-image: url(cards/blank_red.png)')
+                else:
+                    widget.setStyleSheet('background-image: url(cards/blank.png)')
+                    
 
         # update player hand
         for card, widget in zip(self.players[0].hand, self.ui.hand):
-            widget.setText(str(card))
+            widget.setStyleSheet(f'background-image: url(cards/{card}.png)')
 
         # update table
         for table_row, row  in zip(self.table, self.ui.table):
             for card, widget in zip(table_row, row):
-                widget.setText(str(card))
+                widget.setStyleSheet(f'background-image: url(cards/{card}.png)')
 
         # update scores
         for player, widget in zip(self.players, self.ui.scores):
             widget.setText(str(player.score))
+
+        # update pickups
+        for player, widget in zip(self.players, self.ui.pickups):
+            if len(player.pickups) > 0:
+                widget.setPixmap(QPixmap(f'cards/{player.pickups[-1]}.png'))
+            else:
+                widget.setPixmap(QPixmap('cards/blank.png'))
 
     def place_cards(self, player_card_i):
 
@@ -155,8 +165,6 @@ class Game:
         # remove the card from the player's hand
         self.players[0].hand.pop(player_card_i)
 
-        # print('main called')
-
         # add the computer's cards
         for i in range(1, 4):
             # cards.append([self.cpu_turn(i), i])
@@ -164,7 +172,7 @@ class Game:
 
         # move the cards to the played section
         for (card, _), widget in zip(self.cards, self.ui.played):
-            widget.setText(str(card))
+            widget.setPixmap(QPixmap(f'cards/{card}.png'))
 
         # sort the cards by value
         self.cards.sort(key=lambda x: x[0])
@@ -178,16 +186,16 @@ class Game:
         self.update_display()
 
         # place the cards with delay
-        self.timers[0].start(1000)
-        self.timers[1].start(2000)
-        self.timers[2].start(3000)
-        self.timers[3].start(4000)
+        self.timers[0].start(1500)
+        self.timers[1].start(3000)
+        self.timers[2].start(4500)
+        self.timers[3].start(6000)
 
         # reenable the hand after the cards have been placed
-        self.timers[4].start(4000)
+        self.timers[4].start(6000)
 
         if len(self.players[0].hand) == 0:
-            self.timers[5].start(5000)
+            self.timers[5].start(7000)
 
     def reenable_hand(self):
         for i in range(len(self.players[0].hand)):
@@ -221,18 +229,9 @@ class Game:
         # get the player
         player = self.players[player_turn]
 
-        # print('player' + str(player_turn) + ' is placing ' + str(card))
-
         # remove the card from the played section
-        if player_turn == 0:
-            self.ui.p1_played.setText('')
-        elif player_turn == 1:
-            self.ui.p2_played.setText('')
-        elif player_turn == 2:
-            self.ui.p3_played.setText('')
-        elif player_turn == 3:
-            self.ui.p4_played.setText('')
-        
+        self.ui.played[player_turn].setPixmap(QPixmap('cards/blank.png'))
+
         # remove the card from the player's hand
         if player_turn != 0:
             player.hand.remove(card)
@@ -255,12 +254,12 @@ class Game:
             
             self.choose_row(row, player_turn)
   
-        #if the row is about to overflow
-        elif len(self.table[row]) == 5:
-            self.row_overflow(row, player_turn)
-
         # add the card to the end of the row
         self.table[row].append(card)
+
+        #if the row is about to overflow
+        if len(self.table[row]) == 6:
+            self.row_overflow(row, player_turn)
 
         # update the display
         self.update_display()
@@ -292,11 +291,11 @@ class Game:
         player = self.players[player_turn]
         
         # add the cards in the row to the player's pickups
-        for card in self.table[row]:
+        for card in self.table[row][:-1]:
             player.pickups.append(card)
             
         # clear the row
-        self.table[row] = []
+        self.table[row] = [self.table[row][-1]]
 
     def end_round(self):
         # end of round
@@ -311,6 +310,18 @@ class Game:
         for player in self.players:
             for pickup in player.pickups:
                 player.score += self.get_bullheads(pickup)
+        
+    def display_win(self):
+        min_score = float('inf')
+        winner = 0
+        for i, player in enumerate(self.players):
+            if player.score < min_score:
+                min_score = player.score
+                winner = i
+        print('player ' + str(winner) + ' wins')
+        
+        
+        self.update_display()
 
 if __name__ == "__main__":
     game = Game()

@@ -24,12 +24,15 @@
      <rect>
       <x>20</x>
       <y>40</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="hand_lbl">
@@ -79,12 +82,15 @@
      <rect>
       <x>90</x>
       <y>40</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="hand02">
@@ -92,12 +98,15 @@
      <rect>
       <x>160</x>
       <y>40</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="hand03">
@@ -105,12 +114,15 @@
      <rect>
       <x>230</x>
       <y>40</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="hand04">
@@ -118,12 +130,15 @@
      <rect>
       <x>300</x>
       <y>40</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="hand08">
@@ -131,12 +146,15 @@
      <rect>
       <x>580</x>
       <y>40</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="hand07">
@@ -144,12 +162,15 @@
      <rect>
       <x>510</x>
       <y>40</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="hand05">
@@ -157,12 +178,15 @@
      <rect>
       <x>370</x>
       <y>40</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="hand06">
@@ -170,12 +194,15 @@
      <rect>
       <x>440</x>
       <y>40</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="hand09">
@@ -183,12 +210,15 @@
      <rect>
       <x>650</x>
       <y>40</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table03">
@@ -196,12 +226,15 @@
      <rect>
       <x>230</x>
       <y>160</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table05">
@@ -209,12 +242,15 @@
      <rect>
       <x>370</x>
       <y>160</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table02">
@@ -222,12 +258,15 @@
      <rect>
       <x>160</x>
       <y>160</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table00">
@@ -235,12 +274,15 @@
      <rect>
       <x>20</x>
       <y>160</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table01">
@@ -248,12 +290,15 @@
      <rect>
       <x>90</x>
       <y>160</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table04">
@@ -261,12 +306,15 @@
      <rect>
       <x>300</x>
       <y>160</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table13">
@@ -274,12 +322,15 @@
      <rect>
       <x>230</x>
       <y>250</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table15">
@@ -287,12 +338,15 @@
      <rect>
       <x>370</x>
       <y>250</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table12">
@@ -300,12 +354,15 @@
      <rect>
       <x>160</x>
       <y>250</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table10">
@@ -313,12 +370,15 @@
      <rect>
       <x>20</x>
       <y>250</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table11">
@@ -326,12 +386,15 @@
      <rect>
       <x>90</x>
       <y>250</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table14">
@@ -339,12 +402,15 @@
      <rect>
       <x>300</x>
       <y>250</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table20">
@@ -352,12 +418,15 @@
      <rect>
       <x>20</x>
       <y>340</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table23">
@@ -365,12 +434,15 @@
      <rect>
       <x>230</x>
       <y>340</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table21">
@@ -378,12 +450,15 @@
      <rect>
       <x>90</x>
       <y>340</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table31">
@@ -391,12 +466,15 @@
      <rect>
       <x>90</x>
       <y>430</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table32">
@@ -404,12 +482,15 @@
      <rect>
       <x>160</x>
       <y>430</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table25">
@@ -417,12 +498,15 @@
      <rect>
       <x>370</x>
       <y>340</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table35">
@@ -430,12 +514,15 @@
      <rect>
       <x>370</x>
       <y>430</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table22">
@@ -443,12 +530,15 @@
      <rect>
       <x>160</x>
       <y>340</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table24">
@@ -456,12 +546,15 @@
      <rect>
       <x>300</x>
       <y>340</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table34">
@@ -469,12 +562,15 @@
      <rect>
       <x>300</x>
       <y>430</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table30">
@@ -482,12 +578,15 @@
      <rect>
       <x>20</x>
       <y>430</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="table33">
@@ -495,12 +594,15 @@
      <rect>
       <x>230</x>
       <y>430</y>
-      <width>60</width>
-      <height>80</height>
+      <width>62</width>
+      <height>82</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QFrame" name="player1">
