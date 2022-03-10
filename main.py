@@ -1,25 +1,47 @@
-from os import link
 import random
-from re import S
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtGui import QPixmap
 import sys
+from functools import partial
 
 from PyQt6.QtWidgets import QDialog, QApplication
 
 from mainWin import Ui_MainWindow
+from outcomeWin import Ui_Dialog
 
-from functools import partial
 
 
 class Player:
-    def __init__(self, name, link, pick):
+    def __init__(self, name, link, pick, win):
         self.score = 0
         self.hand = []
         self.pickups = []
         self.name = name
         self.link = link
         self.pick = pick
+        self.win = win
+
+class Outcome:
+    def __init__(self, game):
+        self.window = QDialog()
+        self.ui = Ui_Dialog()
+        self.ui.setupUi(self.window)
+        
+        self.game = game
+
+    def show_win(self, player):
+        self.ui.outcome_lbl.setText(f'{player.name} {player.win}!')
+        self.ui.play_again.clicked.connect(partial(self.play_again))
+        self.ui.exit.clicked.connect(self.exit)
+
+    def play_again(self):
+        self.window.close()
+        self.game.reset()
+
+    def exit(self):
+        self.window.close()
+        self.game.main_window.close()
+        self.game.app.quit()
 
 class Game:
     def __init__(self):
@@ -29,15 +51,15 @@ class Game:
         self.ui.setupUi(self.main_window)
     
         self.ui.hand = [self.ui.hand00,
-                         self.ui.hand01,
-                         self.ui.hand02,
-                         self.ui.hand03,
-                         self.ui.hand04,
-                         self.ui.hand05,
-                         self.ui.hand06,
-                         self.ui.hand07,
-                         self.ui.hand08,
-                         self.ui.hand09,]  
+                        self.ui.hand01,
+                        self.ui.hand02,
+                        self.ui.hand03,
+                        self.ui.hand04,
+                        self.ui.hand05,
+                        self.ui.hand06,
+                        self.ui.hand07,
+                        self.ui.hand08,
+                        self.ui.hand09,]  
 
         self.ui.table = [[self.ui.table00, self.ui.table01, self.ui.table02, self.ui.table03, self.ui.table04, self.ui.table05],
                          [self.ui.table10, self.ui.table11, self.ui.table12, self.ui.table13, self.ui.table14, self.ui.table15],
@@ -49,8 +71,8 @@ class Game:
         self.ui.pickups = [self.ui.p1_pickup, self.ui.p2_pickup, self.ui.p3_pickup, self.ui.pr_pickup]
         
         # creating the players array
-        self.players = [Player('You', 'are', 'pick'), Player('Player 2', 'is', 'are'),
-                        Player('Player 3', 'is', 'picks'), Player('Player 4', 'is', 'picks')]
+        self.players = [Player('You', 'are', 'pick', 'win'), Player('Player 2', 'is', 'are', 'wins'),
+                        Player('Player 3', 'is', 'picks', 'wins'), Player('Player 4', 'is', 'picks', 'wins')]
 
         for i, widget in enumerate(self.ui.hand):
             widget.clicked.connect(partial(self.place_cards, i))
@@ -58,6 +80,7 @@ class Game:
         for played in self.ui.played:
             played.setPixmap(QPixmap('cards/blank.png'))
 
+        # self.ui.hand[-1].clicked.connect(self.display_win)
 
         for i, row in enumerate(self.ui.table):
             for widget in row:
@@ -67,6 +90,8 @@ class Game:
 
         self.delay_time = 2000
 
+        self.outcome = Outcome(self)
+        # self.outcome.show(self.players[0])
         self.reset()
 
     def reset(self):
@@ -272,7 +297,6 @@ class Game:
             return
 
         # place next card with delay
-        # QtCore.QTimer.singleShot(self.delay_time, self.call_next_place)
         self.call_next_place()
 
     def choose_row(self, row, player_turn, placed_card=None):
@@ -282,7 +306,6 @@ class Game:
         if placed_card == None:
             placed_card = self.placed_card
 
-        # print(self.table[row])
         print(f'placed card: {placed_card}')
         print(f'{player.name} chooses row {row}')
         self.ui.current_lbl.setText(f'{player.name} chose row {row + 1}')
@@ -300,11 +323,13 @@ class Game:
         # add the card to the end of the row
         self.table[row].append(placed_card)
 
+        # update the display
         self.update_display()
 
+        # disable the table
         self.set_table_state(False)
 
-        print(self.table[row])
+        # place next card with delay
         QtCore.QTimer.singleShot(self.delay_time, self.call_next_place)
 
     def cpu_choose_row(self):
@@ -319,9 +344,10 @@ class Game:
         return row
 
     def call_next_place(self):
+        # if turn is over
         if len(self.cards) == 0:
-            print('=====================')
             self.enable_hand()
+            # if round is over
             if len(self.players[0].hand) == 0:
                 self.ui.current_lbl.setText('Round over')
                 QtCore.QTimer.singleShot(self.delay_time, self.end_round)
@@ -337,8 +363,6 @@ class Game:
         # get the player
         player = self.players[player_turn]
         
-        # print(f'{player.name} row overflow {row}')
-
         # update helpful label
         self.ui.current_lbl.setText(f'{player.name} {player.pick} up row {row + 1}')
  
@@ -376,8 +400,9 @@ class Game:
             if player.score < min_score:
                 min_score = player.score
                 winner = i
+        self.outcome.window.show()
+        self.outcome.show_win(self.players[winner])
         print('player ' + str(winner) + ' wins')
-        
         
         self.update_display()
 
