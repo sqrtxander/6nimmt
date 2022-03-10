@@ -13,12 +13,13 @@ from functools import partial
 
 
 class Player:
-    def __init__(self, name, link):
+    def __init__(self, name, link, pick):
         self.score = 0
         self.hand = []
         self.pickups = []
         self.name = name
         self.link = link
+        self.pick = pick
 
 class Game:
     def __init__(self):
@@ -48,10 +49,9 @@ class Game:
         self.ui.pickups = [self.ui.p1_pickup, self.ui.p2_pickup, self.ui.p3_pickup, self.ui.pr_pickup]
         
         # creating the players array
-        self.players = [Player('You', 'are'), Player('Player 2', 'is'), Player('Player 3', 'is'), Player('Player 4', 'is')]
+        self.players = [Player('You', 'are', 'pick'), Player('Player 2', 'is', 'are'),
+                        Player('Player 3', 'is', 'picks'), Player('Player 4', 'is', 'picks')]
 
-        self.player_card = None
-        
         for i, widget in enumerate(self.ui.hand):
             widget.clicked.connect(partial(self.place_cards, i))
 
@@ -61,11 +61,11 @@ class Game:
 
         for i, row in enumerate(self.ui.table):
             for widget in row:
-                widget.clicked.connect(partial(self.choose_row, i, 0, self.player_card))
+                widget.clicked.connect(partial(self.choose_row, i, 0, None))
 
         self.ui.current_lbl.setText('Pick a card')
 
-        self.delay_time = 3000
+        self.delay_time = 2000
 
         self.reset()
 
@@ -98,6 +98,7 @@ class Game:
         # reenable hand
         self.enable_hand()
 
+        self.ui.current_lbl.setText('Pick a card')
         self.update_display()
 
     def is_game_over(self):
@@ -172,7 +173,6 @@ class Game:
         for widget in self.ui.hand:
             widget.setEnabled(False)
 
-
         # update the display
         self.update_display()
 
@@ -236,10 +236,8 @@ class Game:
                 row = i
 
         if player_turn == 0 and row == None:
-            self.player_card = card
             self.ui.current_lbl.setText(f'You need to choose a row')
             self.set_table_state(True)
-            print(f'{self.player_card=}')
             return
 
         QtCore.QTimer.singleShot(self.delay_time, lambda: self.do_place2(min_score, row, card, player_turn))
@@ -277,9 +275,12 @@ class Game:
         # QtCore.QTimer.singleShot(self.delay_time, self.call_next_place)
         self.call_next_place()
 
-    def choose_row(self, row, player_turn, placed_card):
+    def choose_row(self, row, player_turn, placed_card=None):
         # get the player
         player = self.players[player_turn]
+
+        if placed_card == None:
+            placed_card = self.placed_card
 
         # print(self.table[row])
         print(f'placed card: {placed_card}')
@@ -320,16 +321,17 @@ class Game:
     def call_next_place(self):
         if len(self.cards) == 0:
             print('=====================')
-            self.ui.current_lbl.setText('Pick a card')
             self.enable_hand()
             if len(self.players[0].hand) == 0:
-                self.end_round()
+                self.ui.current_lbl.setText('Round over')
+                QtCore.QTimer.singleShot(self.delay_time, self.end_round)
+            else:
+                self.ui.current_lbl.setText('Pick a card')
             return
 
+        self.placed_card, turn = self.cards.pop(0)
         self.update_display()
-        card, turn = self.cards[0]
-        self.cards.pop(0)
-        self.do_place1(card, turn)
+        self.do_place1(self.placed_card, turn)
 
     def row_overflow(self, row, player_turn):
         # get the player
@@ -338,7 +340,7 @@ class Game:
         # print(f'{player.name} row overflow {row}')
 
         # update helpful label
-        self.ui.current_lbl.setText(f'{player.name} picks up {row + 1}')
+        self.ui.current_lbl.setText(f'{player.name} {player.pick} up row {row + 1}')
  
         # add the cards in the row to the player's pickups
         for card in self.table[row][:-1]:
@@ -362,7 +364,7 @@ class Game:
             self.reset()
 
     def score_pickups(self):
-        # sum the pickusp into the player's score
+        # sum the pickups into the player's score
         for player in self.players:
             for pickup in player.pickups:
                 player.score += self.get_bullheads(pickup)
