@@ -1,4 +1,6 @@
+from os import link
 import random
+from re import S
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtGui import QPixmap
 import sys
@@ -11,11 +13,12 @@ from functools import partial
 
 
 class Player:
-    def __init__(self):
+    def __init__(self, name, link):
         self.score = 0
         self.hand = []
         self.pickups = []
-
+        self.name = name
+        self.link = link
 
 class Game:
     def __init__(self):
@@ -33,44 +36,7 @@ class Game:
                          self.ui.hand06,
                          self.ui.hand07,
                          self.ui.hand08,
-                         self.ui.hand09,]
-
-        # timers for adding delay to placing the cards
-        timer1 = QtCore.QTimer()
-        timer1.setSingleShot(True)
-        timer1.timeout.connect(lambda: self.do_place(self.cards[0][0], self.cards[0][1]))
-        timer2 = QtCore.QTimer()
-        timer2.setSingleShot(True)
-        timer2.timeout.connect(lambda: self.do_place(self.cards[1][0], self.cards[1][1]))
-        timer3 = QtCore.QTimer()
-        timer3.setSingleShot(True)
-        timer3.timeout.connect(lambda: self.do_place(self.cards[2][0], self.cards[2][1]))
-        timer4 = QtCore.QTimer()
-        timer4.setSingleShot(True)
-        timer4.timeout.connect(lambda: self.do_place(self.cards[3][0], self.cards[3][1]))
-        timer5 = QtCore.QTimer()
-        timer5.setSingleShot(True)
-        timer5.timeout.connect(self.reenable_hand)
-        timer6 = QtCore.QTimer()
-        timer6.setSingleShot(True)
-        timer6.timeout.connect(self.end_round)
-        timer7 = QtCore.QTimer()
-        timer7.setSingleShot(True)
-        timer7.timeout.connect(lambda: self.ui.current_lbl.setText('Pick a card.'))
-        timer8=QtCore.QTimer()
-        timer8.setSingleShot(True)
-        timer8.timeout.connect(lambda: self.place_delay(self.cards[0][0], self.cards[0][1], 0))
-        timer9=QtCore.QTimer()
-        timer9.setSingleShot(True)
-        timer9.timeout.connect(lambda: self.place_delay(self.cards[1][0], self.cards[1][1], 1))
-        timer10=QtCore.QTimer()
-        timer10.setSingleShot(True)
-        timer10.timeout.connect(lambda: self.place_delay(self.cards[2][0], self.cards[2][1], 2))
-        timer11=QtCore.QTimer()
-        timer11.setSingleShot(True)
-        timer11.timeout.connect(lambda: self.place_delay(self.cards[3][0], self.cards[3][1], 3))
-        self.timers = [timer1, timer2, timer3, timer4, timer5, timer6, timer7, timer8, timer9, timer10, timer11]
-         
+                         self.ui.hand09,]  
 
         self.ui.table = [[self.ui.table00, self.ui.table01, self.ui.table02, self.ui.table03, self.ui.table04, self.ui.table05],
                          [self.ui.table10, self.ui.table11, self.ui.table12, self.ui.table13, self.ui.table14, self.ui.table15],
@@ -82,15 +48,24 @@ class Game:
         self.ui.pickups = [self.ui.p1_pickup, self.ui.p2_pickup, self.ui.p3_pickup, self.ui.pr_pickup]
         
         # creating the players array
-        self.players = [Player(), Player(), Player(), Player()]
+        self.players = [Player('You', 'are'), Player('Player 2', 'is'), Player('Player 3', 'is'), Player('Player 4', 'is')]
 
+        self.player_card = None
+        
         for i, widget in enumerate(self.ui.hand):
             widget.clicked.connect(partial(self.place_cards, i))
 
         for played in self.ui.played:
             played.setPixmap(QPixmap('cards/blank.png'))
 
-        self.ui.current_lbl.setText('Pick a card.')
+
+        for i, row in enumerate(self.ui.table):
+            for widget in row:
+                widget.clicked.connect(partial(self.choose_row, i, 0, self.player_card))
+
+        self.ui.current_lbl.setText('Pick a card')
+
+        self.delay_time = 3000
 
         self.reset()
 
@@ -121,7 +96,7 @@ class Game:
                 player.score = 0
 
         # reenable hand
-        self.reenable_hand()
+        self.enable_hand()
 
         self.update_display()
 
@@ -201,33 +176,17 @@ class Game:
         # update the display
         self.update_display()
 
-        # place the cards with delay
-        
-        self.timers[7].start(0)
-        self.timers[8].start(1500)
-        self.timers[9].start(3000)
-        self.timers[10].start(4500)
+        # QtCore.QTimer.singleShot(self.delay_time, self.call_next_place)
+        self.call_next_place()
 
-        # reenable the hand after the cards have been placed
-        self.timers[4].start(6000)
-
-        if len(self.players[0].hand) == 0:
-            self.timers[5].start(7000)
-            return
-
-        self.timers[6].start(6000)
-
-    def reenable_hand(self):
+    def enable_hand(self):
         for i in range(len(self.players[0].hand)):
             self.ui.hand[i].setEnabled(True)
-
-    def place_delay(self, card, player_turn, round_turn):
-        if player_turn == 0:
-            self.ui.current_lbl.setText(f'You are placing {card}.')
-        else:
-            self.ui.current_lbl.setText(f'Player {player_turn + 1} is placing {card}.')
-
-        self.timers[round_turn].start(1500)
+    
+    def set_table_state(self, state):
+        for row in self.ui.table:
+            for widget in row:
+                widget.setEnabled(state)
 
     def cpu_turn(self, player_turn):
         # get the player
@@ -253,12 +212,14 @@ class Game:
 
         return card
 
-    def do_place(self, card, player_turn):
+    def do_place1(self, card, player_turn):
         # get the player
         player = self.players[player_turn]
 
-        # remove the card from the played section
-        self.ui.played[player_turn].setPixmap(QPixmap('cards/blank.png'))
+        print(f'{player.name} places {card}')
+
+        # update the helpful label
+        self.ui.current_lbl.setText(f'{player.name} {player.link} placing {card}')
 
         # remove the card from the player's hand
         if player_turn != 0:
@@ -267,41 +228,83 @@ class Game:
 
         # find the row that the card goes on
         min_score = float('inf')
+        row = None
         for i, r in enumerate(self.table):
             score = card - r[-1]
             if 0 < score < min_score:
                 min_score = score
                 row = i
 
+        if player_turn == 0 and row == None:
+            self.player_card = card
+            self.ui.current_lbl.setText(f'You need to choose a row')
+            self.set_table_state(True)
+            print(f'{self.player_card=}')
+            return
+
+        QtCore.QTimer.singleShot(self.delay_time, lambda: self.do_place2(min_score, row, card, player_turn))
+
+        # self.do_place2(min_score, row, card, player_turn)
+
+    def do_place2(self, min_score, row, card, player_turn):
+        
+        # get the player
+        player = self.players[player_turn]
+
         # if there is no row the card goes on
         if min_score == float('inf'):
-            if player_turn == 0:
-                row = 0
-            else:
+            if player_turn != 0:
                 row = self.cpu_choose_row()
-            
-            self.choose_row(row, player_turn)
-  
+                self.ui.current_lbl.setText(f'{player.name} {player.link} choosing a row')
+                QtCore.QTimer.singleShot(self.delay_time, lambda: self.choose_row(row, player_turn, card))
+            return 
+
+        # remove the card from the played section
+        self.ui.played[player_turn].setPixmap(QPixmap('cards/blank.png'))
+
         # add the card to the end of the row
         self.table[row].append(card)
-
-        #if the row is about to overflow
-        if len(self.table[row]) == 6:
-            self.row_overflow(row, player_turn)
 
         # update the display
         self.update_display()
 
-    def choose_row(self, row, player_turn):
+        #if the row is about to overflow
+        if len(self.table[row]) == 6:
+            QtCore.QTimer.singleShot(self.delay_time, lambda: self.row_overflow(row, player_turn))
+            return
+
+        # place next card with delay
+        # QtCore.QTimer.singleShot(self.delay_time, self.call_next_place)
+        self.call_next_place()
+
+    def choose_row(self, row, player_turn, placed_card):
         # get the player
         player = self.players[player_turn]
-        
+
+        # print(self.table[row])
+        print(f'placed card: {placed_card}')
+        print(f'{player.name} chooses row {row}')
+        self.ui.current_lbl.setText(f'{player.name} chose row {row + 1}')
+
         # add the cards in the row to the player's pickups
         for card in self.table[row]:
             player.pickups.append(card)
         
         #clear the row
         self.table[row] = []
+
+        # remove the card from the played section
+        self.ui.played[player_turn].setPixmap(QPixmap('cards/blank.png'))
+
+        # add the card to the end of the row
+        self.table[row].append(placed_card)
+
+        self.update_display()
+
+        self.set_table_state(False)
+
+        print(self.table[row])
+        QtCore.QTimer.singleShot(self.delay_time, self.call_next_place)
 
     def cpu_choose_row(self):
         # find the row with the lowest bullheads
@@ -314,16 +317,41 @@ class Game:
                 row = i
         return row
 
+    def call_next_place(self):
+        if len(self.cards) == 0:
+            print('=====================')
+            self.ui.current_lbl.setText('Pick a card')
+            self.enable_hand()
+            if len(self.players[0].hand) == 0:
+                self.end_round()
+            return
+
+        self.update_display()
+        card, turn = self.cards[0]
+        self.cards.pop(0)
+        self.do_place1(card, turn)
+
     def row_overflow(self, row, player_turn):
         # get the player
         player = self.players[player_turn]
         
+        # print(f'{player.name} row overflow {row}')
+
+        # update helpful label
+        self.ui.current_lbl.setText(f'{player.name} picks up {row + 1}')
+ 
         # add the cards in the row to the player's pickups
         for card in self.table[row][:-1]:
             player.pickups.append(card)
             
-        # clear the row
+        # clear the row except for the placed card
         self.table[row] = [self.table[row][-1]]
+
+        # update the display
+        self.update_display()
+
+        # place the next card with delay
+        QtCore.QTimer.singleShot(self.delay_time, self.call_next_place)
 
     def end_round(self):
         # end of round
