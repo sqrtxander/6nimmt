@@ -16,6 +16,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(8)
         MainWindow.setFont(font)
+        MainWindow.setTabShape(QtWidgets.QTabWidget.TabShape.Rounded)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.hand00 = QtWidgets.QPushButton(self.centralwidget)
@@ -323,6 +324,16 @@ class Ui_MainWindow(object):
         font.setPointSize(18)
         self.p4_score.setFont(font)
         self.p4_score.setObjectName("p4_score")
+        self.current_lbl = QtWidgets.QLabel(self.centralwidget)
+        self.current_lbl.setGeometry(QtCore.QRect(183, 0, 365, 32))
+        font = QtGui.QFont()
+        font.setPointSize(18)
+        self.current_lbl.setFont(font)
+        self.current_lbl.setAutoFillBackground(False)
+        self.current_lbl.setStyleSheet("background-color: white;")
+        self.current_lbl.setText("")
+        self.current_lbl.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.current_lbl.setObjectName("current_lbl")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 730, 21))
@@ -337,7 +348,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "6 Nimmt!"))
         self.hand_lbl.setText(_translate("MainWindow", "Your Hand:"))
         self.table_lbl.setText(_translate("MainWindow", "Table:"))
         self.p1_lbl.setText(_translate("MainWindow", "You"))

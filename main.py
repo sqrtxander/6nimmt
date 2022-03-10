@@ -54,8 +54,23 @@ class Game:
         timer6 = QtCore.QTimer()
         timer6.setSingleShot(True)
         timer6.timeout.connect(self.end_round)
-        self.timers = [timer1, timer2, timer3, timer4, timer5, timer6]
-
+        timer7 = QtCore.QTimer()
+        timer7.setSingleShot(True)
+        timer7.timeout.connect(lambda: self.ui.current_lbl.setText('Pick a card.'))
+        timer8=QtCore.QTimer()
+        timer8.setSingleShot(True)
+        timer8.timeout.connect(lambda: self.place_delay(self.cards[0][0], self.cards[0][1], 0))
+        timer9=QtCore.QTimer()
+        timer9.setSingleShot(True)
+        timer9.timeout.connect(lambda: self.place_delay(self.cards[1][0], self.cards[1][1], 1))
+        timer10=QtCore.QTimer()
+        timer10.setSingleShot(True)
+        timer10.timeout.connect(lambda: self.place_delay(self.cards[2][0], self.cards[2][1], 2))
+        timer11=QtCore.QTimer()
+        timer11.setSingleShot(True)
+        timer11.timeout.connect(lambda: self.place_delay(self.cards[3][0], self.cards[3][1], 3))
+        self.timers = [timer1, timer2, timer3, timer4, timer5, timer6, timer7, timer8, timer9, timer10, timer11]
+         
 
         self.ui.table = [[self.ui.table00, self.ui.table01, self.ui.table02, self.ui.table03, self.ui.table04, self.ui.table05],
                          [self.ui.table10, self.ui.table11, self.ui.table12, self.ui.table13, self.ui.table14, self.ui.table15],
@@ -75,6 +90,7 @@ class Game:
         for played in self.ui.played:
             played.setPixmap(QPixmap('cards/blank.png'))
 
+        self.ui.current_lbl.setText('Pick a card.')
 
         self.reset()
 
@@ -186,20 +202,32 @@ class Game:
         self.update_display()
 
         # place the cards with delay
-        self.timers[0].start(1500)
-        self.timers[1].start(3000)
-        self.timers[2].start(4500)
-        self.timers[3].start(6000)
+        
+        self.timers[7].start(0)
+        self.timers[8].start(1500)
+        self.timers[9].start(3000)
+        self.timers[10].start(4500)
 
         # reenable the hand after the cards have been placed
         self.timers[4].start(6000)
 
         if len(self.players[0].hand) == 0:
             self.timers[5].start(7000)
+            return
+
+        self.timers[6].start(6000)
 
     def reenable_hand(self):
         for i in range(len(self.players[0].hand)):
             self.ui.hand[i].setEnabled(True)
+
+    def place_delay(self, card, player_turn, round_turn):
+        if player_turn == 0:
+            self.ui.current_lbl.setText(f'You are placing {card}.')
+        else:
+            self.ui.current_lbl.setText(f'Player {player_turn + 1} is placing {card}.')
+
+        self.timers[round_turn].start(1500)
 
     def cpu_turn(self, player_turn):
         # get the player
