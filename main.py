@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import QDialog, QApplication
 
 from mainWin import Ui_MainWindow
 from outcomeWin import Ui_Dialog
-
+from rulesWin import Ui_Dialog1
 
 
 class Player:
@@ -42,6 +42,12 @@ class Outcome:
         self.window.close()
         self.game.main_window.close()
         self.game.app.quit()
+
+class Rules():
+    def __init__(self):
+        self.window = QDialog()
+        self.ui = Ui_Dialog1()
+        self.ui.setupUi(self.window) 
 
 class Game:
     def __init__(self):
@@ -86,12 +92,16 @@ class Game:
             for widget in row:
                 widget.clicked.connect(partial(self.choose_row, i, 0, None))
 
+
         self.ui.current_lbl.setText('Pick a card')
 
         self.delay_time = 2000
 
         self.outcome = Outcome(self)
-        # self.outcome.show(self.players[0])
+        self.rules = Rules()
+        self.ui.rules_button.clicked.connect(self.rules.window.show)
+
+
         self.reset()
 
     def reset(self):
@@ -175,7 +185,6 @@ class Game:
                 widget.setPixmap(QPixmap('cards/blank.png'))
 
     def place_cards(self, player_card_i):
-
         # add the player's card
         self.cards = [[self.players[0].hand[player_card_i], 0]]
 
@@ -184,7 +193,6 @@ class Game:
 
         # add the computer's cards
         for i in range(1, 4):
-            # cards.append([self.cpu_turn(i), i])
             self.cards.append([self.players[i].hand[-1], i])
 
         # move the cards to the played section
@@ -201,7 +209,6 @@ class Game:
         # update the display
         self.update_display()
 
-        # QtCore.QTimer.singleShot(self.delay_time, self.call_next_place)
         self.call_next_place()
 
     def enable_hand(self):
@@ -266,8 +273,6 @@ class Game:
             return
 
         QtCore.QTimer.singleShot(self.delay_time, lambda: self.do_place2(min_score, row, card, player_turn))
-
-        # self.do_place2(min_score, row, card, player_turn)
 
     def do_place2(self, min_score, row, card, player_turn):
         

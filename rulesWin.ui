@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>726</width>
+    <height>562</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>6 Nimmt! Rules</string>
+  </property>
+  <widget class="QLabel" name="heading_lbl">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>0</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Rules</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="rules_lbl">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>710</width>
+     <height>421</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>The aim of the game is to be the player with the lowest score. There is a deck of cards that range from 1 - 104. The game is played over several rounds with 10 turns each. In each turn all players will choose a card simultaneously, then the cards will be placed on the table in ascending order based on the following rules:
+
+The card must go on the row with the right most card is lower than the played card.
+
+If there are multiple rows with the lower cards, the card goes on the row where the right most card is closest to the played card.
+
+If the row where the card goes contains 5 cards (The 6th card is being placed), the player placing the card takes all the cards in that row and puts them into their pickups, the card they placed then becomes the first card in that row.
+
+If there is no row with the right most card lower than the card being placed, the player placing the card chooses a row to take into their pickups with the card they placed becoming the new first card of that row.</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="heading_lbl_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>410</y>
+     <width>151</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>End of round</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="rules_lbl_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>440</y>
+     <width>710</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>At the end of the round, each player scores the amount of bullheads in their pickup pile. Then if a player has at least 66 points, the game is over and the person with the lowest amount of points wins. Otherwise the cards are reshuffled and redealt to the player's hands and another round is played.</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

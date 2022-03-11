@@ -334,6 +334,9 @@ class Ui_MainWindow(object):
         self.current_lbl.setText("")
         self.current_lbl.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.current_lbl.setObjectName("current_lbl")
+        self.rules_button = QtWidgets.QPushButton(self.centralwidget)
+        self.rules_button.setGeometry(QtCore.QRect(690, 0, 31, 31))
+        self.rules_button.setObjectName("rules_button")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 730, 21))
@@ -362,6 +365,7 @@ class Ui_MainWindow(object):
         self.p3_score.setText(_translate("MainWindow", "00"))
         self.p4_lbl.setText(_translate("MainWindow", "P4"))
         self.p4_score.setText(_translate("MainWindow", "00"))
+        self.rules_button.setText(_translate("MainWindow", "i"))
 
 
 if __name__ == "__main__":
