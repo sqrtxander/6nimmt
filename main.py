@@ -92,6 +92,8 @@ class Game:
             for widget in row:
                 widget.clicked.connect(partial(self.choose_row, i, 0, None))
 
+        self.ui.play_btn.clicked.connect(self.hide_menu)
+        self.ui.exit_btn.clicked.connect(self.close)
 
         self.ui.current_lbl.setText('Pick a card')
 
@@ -103,6 +105,17 @@ class Game:
 
 
         self.reset()
+
+    def hide_menu(self):
+        self.ui.play_btn.hide()
+        self.ui.exit_btn.hide()
+        self.ui.menu_cover.hide()
+        self.ui.menu_text.hide()
+
+    def close(self):
+        self.main_window.close()
+        self.app.quit()
+
 
     def reset(self):
         # creating the deck
