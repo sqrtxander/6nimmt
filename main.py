@@ -77,7 +77,7 @@ class Game:
         self.ui.pickups = [self.ui.p1_pickup, self.ui.p2_pickup, self.ui.p3_pickup, self.ui.pr_pickup]
         
         # creating the players array
-        self.players = [Player('You', 'are', 'pick', 'win'), Player('Player 2', 'is', 'are', 'wins'),
+        self.players = [Player('You', 'are', 'pick', 'win'), Player('Player 2', 'is', 'picks', 'wins'),
                         Player('Player 3', 'is', 'picks', 'wins'), Player('Player 4', 'is', 'picks', 'wins')]
 
         for i, widget in enumerate(self.ui.hand):
@@ -104,6 +104,7 @@ class Game:
         self.ui.rules_button.clicked.connect(self.rules.window.show)
 
 
+
         self.reset()
 
     def hide_menu(self):
@@ -111,6 +112,13 @@ class Game:
         self.ui.exit_btn.hide()
         self.ui.menu_cover.hide()
         self.ui.menu_text.hide()
+
+        self.app.setStyleSheet('''
+    QMainWindow {
+        background-image: url(background/wood.png); 
+        background-position: center;
+        }
+        ''')
 
     def close(self):
         self.main_window.close()

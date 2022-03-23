@@ -48,9 +48,9 @@
    <property name="text">
     <string>The aim of the game is to be the player with the lowest score. There is a deck of cards that range from 1 - 104. The game is played over several rounds with 10 turns each. In each turn all players will choose a card simultaneously, then the cards will be placed on the table in ascending order based on the following rules:
 
-The card must go on the row with the right most card is lower than the played card.
+The card must go on the row where the right most card is lower than the played card.
 
-If there are multiple rows with the lower cards, the card goes on the row where the right most card is closest to the played card.
+If there are multiple rows with lower cards, the card goes on the row where the right most card is closest to the played card.
 
 If the row where the card goes contains 5 cards (The 6th card is being placed), the player placing the card takes all the cards in that row and puts them into their pickups, the card they placed then becomes the first card in that row.
 
