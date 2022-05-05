@@ -18,6 +18,10 @@
   <property name="windowTitle">
    <string>6 Nimmt!</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>background/icon.png</normaloff>background/icon.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
@@ -1162,6 +1166,120 @@
      <string>Exit</string>
     </property>
    </widget>
+   <widget class="QLabel" name="menu_image">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>120</y>
+      <width>128</width>
+      <height>128</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>426</x>
+      <y>126</y>
+      <width>20</width>
+      <height>401</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>3</number>
+    </property>
+    <property name="midLineWidth">
+     <number>0</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>436</x>
+      <y>119</y>
+      <width>311</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+
+</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>3</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <zorder>hand00</zorder>
+   <zorder>hand_lbl</zorder>
+   <zorder>table_lbl</zorder>
+   <zorder>hand01</zorder>
+   <zorder>hand02</zorder>
+   <zorder>hand03</zorder>
+   <zorder>hand04</zorder>
+   <zorder>hand08</zorder>
+   <zorder>hand07</zorder>
+   <zorder>hand05</zorder>
+   <zorder>hand06</zorder>
+   <zorder>hand09</zorder>
+   <zorder>table03</zorder>
+   <zorder>table05</zorder>
+   <zorder>table02</zorder>
+   <zorder>table00</zorder>
+   <zorder>table01</zorder>
+   <zorder>table04</zorder>
+   <zorder>table13</zorder>
+   <zorder>table15</zorder>
+   <zorder>table12</zorder>
+   <zorder>table10</zorder>
+   <zorder>table11</zorder>
+   <zorder>table14</zorder>
+   <zorder>table20</zorder>
+   <zorder>table23</zorder>
+   <zorder>table21</zorder>
+   <zorder>table31</zorder>
+   <zorder>table32</zorder>
+   <zorder>table25</zorder>
+   <zorder>table35</zorder>
+   <zorder>table22</zorder>
+   <zorder>table24</zorder>
+   <zorder>table34</zorder>
+   <zorder>table30</zorder>
+   <zorder>table33</zorder>
+   <zorder>player1</zorder>
+   <zorder>played_lbl</zorder>
+   <zorder>pick_up_lbl</zorder>
+   <zorder>score_lbl</zorder>
+   <zorder>player_2</zorder>
+   <zorder>player_3</zorder>
+   <zorder>player_4</zorder>
+   <zorder>current_lbl</zorder>
+   <zorder>rules_button</zorder>
+   <zorder>line</zorder>
+   <zorder>line_2</zorder>
+   <zorder>menu_cover</zorder>
+   <zorder>menu_image</zorder>
+   <zorder>menu_text</zorder>
+   <zorder>play_btn</zorder>
+   <zorder>exit_btn</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

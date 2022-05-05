@@ -1,6 +1,6 @@
 import random
 from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtGui import QPixmap
+from PyQt6.QtGui import QPixmap, QIcon
 import sys
 from functools import partial
 
@@ -91,9 +91,13 @@ class Game:
         for i, row in enumerate(self.ui.table):
             for widget in row:
                 widget.clicked.connect(partial(self.choose_row, i, 0, None))
+# 
+        # self.ui.setWindowIcon(QIcon('background/icon.png'))
 
         self.ui.play_btn.clicked.connect(self.hide_menu)
         self.ui.exit_btn.clicked.connect(self.close)
+
+        self.ui.menu_image.setPixmap(QPixmap('background/icon.png'))
 
         self.ui.current_lbl.setText('Pick a card')
 
@@ -111,11 +115,12 @@ class Game:
         self.ui.play_btn.hide()
         self.ui.exit_btn.hide()
         self.ui.menu_cover.hide()
+        self.ui.menu_image.hide()
         self.ui.menu_text.hide()
 
         self.app.setStyleSheet('''
     QMainWindow {
-        background-image: url(background/wood.png); 
+        background-image: url(background/felt.png); 
         background-position: center;
         }
         ''')
@@ -154,6 +159,7 @@ class Game:
         # reenable hand
         self.enable_hand()
 
+        self.set_table_state(False)
         self.ui.current_lbl.setText('Pick a card')
         self.update_display()
 
