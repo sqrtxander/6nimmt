@@ -7,8 +7,8 @@ from functools import partial
 from PyQt6.QtWidgets import QDialog, QApplication
 
 from mainWin import Ui_MainWindow
-from outcomeWin import Ui_Dialog
-from rulesWin import Ui_Dialog1
+from rules import Rules
+from outcome import Outcome
 
 
 class Player:
@@ -21,33 +21,6 @@ class Player:
         self.pick = pick
         self.win = win
 
-class Outcome:
-    def __init__(self, game):
-        self.window = QDialog()
-        self.ui = Ui_Dialog()
-        self.ui.setupUi(self.window)
-        
-        self.game = game
-
-    def show_win(self, player):
-        self.ui.outcome_lbl.setText(f'{player.name} {player.win}!')
-        self.ui.play_again.clicked.connect(partial(self.play_again))
-        self.ui.exit.clicked.connect(self.exit)
-
-    def play_again(self):
-        self.window.close()
-        self.game.reset()
-
-    def exit(self):
-        self.window.close()
-        self.game.main_window.close()
-        self.game.app.quit()
-
-class Rules():
-    def __init__(self):
-        self.window = QDialog()
-        self.ui = Ui_Dialog1()
-        self.ui.setupUi(self.window) 
 
 class Game:
     def __init__(self):
@@ -106,7 +79,6 @@ class Game:
         self.outcome = Outcome(self)
         self.rules = Rules()
         self.ui.rules_button.clicked.connect(self.rules.window.show)
-
 
 
         self.reset()
