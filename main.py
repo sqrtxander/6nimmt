@@ -9,6 +9,7 @@ from PyQt6.QtWidgets import QDialog, QApplication
 from mainWin import Ui_MainWindow
 from rules import Rules
 from outcome import Outcome
+from settings import Settings
 
 
 class Player:
@@ -64,7 +65,7 @@ class Game:
         for i, row in enumerate(self.ui.table):
             for widget in row:
                 widget.clicked.connect(partial(self.choose_row, i, 0, None))
-# 
+
         # self.ui.setWindowIcon(QIcon('background/icon.png'))
 
         self.ui.play_btn.clicked.connect(self.hide_menu)
@@ -78,6 +79,8 @@ class Game:
 
         self.outcome = Outcome(self)
         self.rules = Rules()
+        self.settings = Settings(self)
+        
         self.ui.rules_button.clicked.connect(self.rules.window.show)
 
 

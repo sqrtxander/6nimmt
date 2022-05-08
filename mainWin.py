@@ -464,13 +464,16 @@ class Ui_MainWindow(object):
         self.play_btn.raise_()
         self.exit_btn.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 730, 21))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 730, 21))
+        self.menubar.setObjectName("menubar")
+        self.menuSettings = QtWidgets.QMenu(self.menubar)
+        self.menuSettings.setObjectName("menuSettings")
+        MainWindow.setMenuBar(self.menubar)
+        self.menubar.addAction(self.menuSettings.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -495,6 +498,7 @@ class Ui_MainWindow(object):
         self.menu_text.setText(_translate("MainWindow", "6 Nimmt!"))
         self.play_btn.setText(_translate("MainWindow", "Play"))
         self.exit_btn.setText(_translate("MainWindow", "Exit"))
+        self.menuSettings.setTitle(_translate("MainWindow", "Settings"))
 
 
 if __name__ == "__main__":

@@ -6,11 +6,16 @@ from functools import partial
 
 from PyQt6.QtWidgets import QDialog, QApplication
 
-from rulesWin import Ui_Dialog
+from settingsWin import Ui_Dialog
 
 
-class Rules():
-    def __init__(self):
+class Settings:
+    def __init__(self, game):
         self.window = QDialog()
         self.ui = Ui_Dialog()
-        self.ui.setupUi(self.window) 
+        self.ui.setupUi(self.window)
+        
+        self.game = game
+
+    
+
