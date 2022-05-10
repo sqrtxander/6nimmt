@@ -82,7 +82,7 @@ class Game:
         self.settings = Settings(self)
         
         self.ui.rules_button.clicked.connect(self.rules.window.show)
-
+        self.ui.settings_button.clicked.connect(self.settings.window.show)
 
         self.reset()
 

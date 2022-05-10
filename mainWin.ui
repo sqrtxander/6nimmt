@@ -1228,6 +1228,24 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
+   <widget class="QPushButton" name="settings_button">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>5</y>
+      <width>60</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Settings</string>
+    </property>
+   </widget>
    <zorder>hand00</zorder>
    <zorder>hand_lbl</zorder>
    <zorder>table_lbl</zorder>
@@ -1275,11 +1293,12 @@
    <zorder>rules_button</zorder>
    <zorder>line</zorder>
    <zorder>line_2</zorder>
+   <zorder>settings_button</zorder>
    <zorder>menu_cover</zorder>
    <zorder>menu_image</zorder>
    <zorder>menu_text</zorder>
-   <zorder>play_btn</zorder>
    <zorder>exit_btn</zorder>
+   <zorder>play_btn</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
@@ -1291,12 +1310,6 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuSettings">
-    <property name="title">
-     <string>Settings</string>
-    </property>
-   </widget>
-   <addaction name="menuSettings"/>
   </widget>
  </widget>
  <resources/>
