@@ -1,4 +1,3 @@
-import random
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtGui import QPixmap, QIcon
 import sys
@@ -16,11 +15,11 @@ class Outcome:
         self.ui.setupUi(self.window)
         
         self.game = game
+        self.ui.play_again.clicked.connect(self.play_again)
+        self.ui.exit.clicked.connect(self.exit)
 
     def show_win(self, player):
         self.ui.outcome_lbl.setText(f'{player.name} {player.win}!')
-        self.ui.play_again.clicked.connect(partial(self.play_again))
-        self.ui.exit.clicked.connect(self.exit)
 
     def play_again(self):
         self.window.close()

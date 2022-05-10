@@ -76,6 +76,7 @@ class Game:
         self.ui.current_lbl.setText('Pick a card')
 
         self.delay_time = 2000
+        self.points_required = 66
 
         self.outcome = Outcome(self)
         self.rules = Rules()
@@ -139,8 +140,8 @@ class Game:
         self.update_display()
 
     def is_game_over(self):
-        # true if any player has a score >= 66
-        return any(player.score >= 66 for player in self.players)
+        # true if any player has a score >= the required points to end the game
+        return any(player.score >= self.points_required for player in self.players)
 
     def get_bullheads(self, card):
         if card == 55:
