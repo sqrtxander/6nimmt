@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>6 Nimmt! Winner</string>
   </property>
   <widget class="QLabel" name="outcome_lbl">
    <property name="geometry">

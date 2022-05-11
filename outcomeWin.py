@@ -38,7 +38,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "6 Nimmt! Winner"))
         self.outcome_lbl.setText(_translate("Dialog", "This player wins"))
         self.play_again.setText(_translate("Dialog", "Play again"))
         self.exit.setText(_translate("Dialog", "Exit game"))
