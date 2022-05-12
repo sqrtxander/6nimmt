@@ -18,8 +18,12 @@ class Outcome:
         self.ui.play_again.clicked.connect(self.play_again)
         self.ui.exit.clicked.connect(self.exit)
 
-    def show_win(self, player):
-        self.ui.outcome_lbl.setText(f'{player.name} {player.win}!')
+    def show_win(self, winners):
+        winner_names = ' & '.join(winner.name for winner in winners)
+        if len(winners) > 1:
+            self.ui.outcome_lbl.setText(f'{winner_names} draw!')
+        else:
+            self.ui.outcome_lbl.setText(f'{winner_names} {winners[0].win}!')
 
     def play_again(self):
         self.window.close()

@@ -403,14 +403,19 @@ class Game:
         
     def display_win(self):
         min_score = float('inf')
-        winner = 0
-        for i, player in enumerate(self.players):
+        winners = []
+
+        for player in self.players:
             if player.score < min_score:
                 min_score = player.score
-                winner = i
+                winners = [player]
+            elif player.score == min_score:
+                winners.append(player)
+        
+
         self.outcome.window.show()
-        self.outcome.show_win(self.players[winner])
-        print('player ' + str(winner) + ' wins')
+        self.outcome.show_win(winners)
+        print('player ' + str(winners) + ' wins')
         
         self.update_display()
 
