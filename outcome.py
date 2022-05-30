@@ -14,6 +14,8 @@ class Outcome:
         self.ui = Ui_Dialog()
         self.ui.setupUi(self.window)
         
+        self.window.setFixedSize(self.window.width(), self.window.height())
+        
         self.game = game
         self.ui.play_again.clicked.connect(self.play_again)
         self.ui.exit.clicked.connect(self.exit)

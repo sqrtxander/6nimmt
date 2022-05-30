@@ -13,6 +13,8 @@ class Rules():
         self.ui = Ui_Dialog()
         self.ui.setupUi(self.window) 
 
+        self.window.setFixedSize(self.window.width(), self.window.height())
+        
         self.page = 0
         self.page_count = 2
         page_0 = [self.ui.pg0_heading1, self.ui.pg0_rules1, self.ui.pg0_heading2, self.ui.pg0_rules2]

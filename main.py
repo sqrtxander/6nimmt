@@ -1,10 +1,10 @@
 import random
 from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtGui import QPixmap, QIcon
+from PyQt6.QtGui import QPixmap
 import sys
 from functools import partial
 
-from PyQt6.QtWidgets import QDialog, QApplication
+from PyQt6.QtWidgets import QApplication
 
 from mainWin import Ui_MainWindow
 from rules import Rules
@@ -29,7 +29,9 @@ class Game:
         self.main_window = QtWidgets.QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.main_window)
-    
+
+        self.main_window.setFixedSize(self.main_window.width(), self.main_window.height())
+
         self.ui.hand = [self.ui.hand00,
                         self.ui.hand01,
                         self.ui.hand02,
@@ -196,7 +198,7 @@ class Game:
 
         # add the computer's cards
         for i in range(1, 4):
-            self.cards.append([self.players[i].hand[-1], i])
+            self.cards.append([self.cpu_turn(i), i])
 
         # move the cards to the played section
         for (card, _), widget in zip(self.cards, self.ui.played):
@@ -250,8 +252,6 @@ class Game:
     def do_place1(self, card, player_turn):
         # get the player
         player = self.players[player_turn]
-
-        print(f'{player.name} places {card}')
 
         # update the helpful label
         self.ui.current_lbl.setText(f'{player.name} {player.link} placing {card}')
@@ -314,8 +314,6 @@ class Game:
         if placed_card == None:
             placed_card = self.placed_card
 
-        print(f'placed card: {placed_card}')
-        print(f'{player.name} chooses row {row}')
         self.ui.current_lbl.setText(f'{player.name} chose row {row + 1}')
 
         # add the cards in the row to the player's pickups
@@ -414,9 +412,7 @@ class Game:
         
 
         self.outcome.window.show()
-        self.outcome.show_win(winners)
-        print('player ' + str(winners) + ' wins')
-        
+        self.outcome.show_win(winners)     
         self.update_display()
 
 if __name__ == "__main__":

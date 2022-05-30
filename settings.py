@@ -14,6 +14,8 @@ class Settings:
         self.window = QDialog()
         self.ui = Ui_Dialog()
         self.ui.setupUi(self.window)
+        
+        self.window.setFixedSize(self.window.width(), self.window.height())
 
         with open('settings.json', 'r') as f:
             self.settings_json = json.load(f)
