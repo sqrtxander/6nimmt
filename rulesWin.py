@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'rulesWin.ui'
+# Form implementation generated from reading ui file '.\ui-files\rulesWin.ui'
 #
 # Created by: PyQt6 UI code generator 6.2.3
 #
@@ -13,6 +13,9 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(726, 562)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(".\\ui-files\\../background/icon.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        Dialog.setWindowIcon(icon)
         self.heading_lbl = QtWidgets.QLabel(Dialog)
         self.heading_lbl.setGeometry(QtCore.QRect(20, 10, 71, 31))
         font = QtGui.QFont()

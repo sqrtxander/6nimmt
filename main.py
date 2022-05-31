@@ -68,8 +68,6 @@ class Game:
             for widget in row:
                 widget.clicked.connect(partial(self.choose_row, i, 0, None))
 
-        # self.ui.setWindowIcon(QIcon('background/icon.png'))
-
         self.ui.play_btn.clicked.connect(self.hide_menu)
         self.ui.exit_btn.clicked.connect(self.close)
 

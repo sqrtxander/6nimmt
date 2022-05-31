@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'settingsWin.ui'
+# Form implementation generated from reading ui file '.\ui-files\settingsWin.ui'
 #
 # Created by: PyQt6 UI code generator 6.2.3
 #
@@ -18,6 +18,9 @@ class Ui_Dialog(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Dialog.sizePolicy().hasHeightForWidth())
         Dialog.setSizePolicy(sizePolicy)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(".\\ui-files\\../background/icon.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        Dialog.setWindowIcon(icon)
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
         self.buttonBox.setGeometry(QtCore.QRect(100, 160, 221, 21))
         font = QtGui.QFont()
