@@ -228,22 +228,17 @@ class Game:
         player = self.players[player_turn]
         
         # find the card with the lowest difference between itself and the table
-        min_score = float('inf')
+        min_delta = float('inf')
         card = player.hand[0]
-        for c in player.hand:
-            min_delta = float('inf')
+        for c in player.hand:     
             for row in self.table:
-                
                 if len(row) == 5:
                     continue
 
                 delta = c - row[-1]
                 if 0 < delta < min_delta:
                     min_delta = delta
-
-            if min_score < min_delta:
-                min_score = min_delta
-                card = c
+                    card = c
 
         return card
 
